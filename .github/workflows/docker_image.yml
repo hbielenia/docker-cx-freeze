@@ -1,0 +1,77 @@
+# docker-cx-freeze - Docker configuration for cx_Freeze.
+# Written in 2024 by Hubert Bielenia <13271065+hbielenia@users.noreply.github.com>
+# To the extent possible under law, the author(s) have dedicated all copyright and related
+# and neighboring rights to this software to the public domain worldwide. This software
+# is distributed without any warranty.
+# You should have received a copy of the CC0 Public Domain Dedication along with this software.
+# If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+name: docker_image
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '3.11-windowsservercore-1809.Dockerfile'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+      - reopened
+    paths:
+      - '3.11-windowsservercore-1809.Dockerfile'
+      - './github/workflows/docker_image.yml'
+env:
+  CX_FREEZE_VERSION: '7.2.0'
+  PYTHON_VERSION_MAJOR: '3.11'
+  PYTHON_VERSION_MINOR: '9'
+  WINDOWS_VERSION: 'windowsservercore-1809'
+  DOCKERHUB_REPO: ${{ vars.DOCKERHUB_USERNAME }}/cx-freeze
+  GHCR_REPO: ghcr.io/${{ github.repository }}
+  DOCKER_CACHE_PATH: C:\ProgramData\Docker\windowsfilter
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # 4.1.7
+        with:
+          persist-credentials: false
+      - name: Build Docker image
+        run: >-
+          docker build
+          --quiet
+          --platform windows/amd64
+          -t ${{ env.DOCKERHUB_REPO }}:latest
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:latest
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -f ${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}.Dockerfile
+          .
+      - name: Test the built image
+        run: docker run --rm ${{ env.DOCKERHUB_REPO }}:latest cxfreeze --version
+      - name: Log in to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # 3.3.0
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # 3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push the built image
+        if: github.event_name == 'push'
+        run: docker push -a -q ${{ env.DOCKERHUB_REPO }}
