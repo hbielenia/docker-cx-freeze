@@ -23,7 +23,8 @@ on:
       - '3.11-windowsservercore-1809.Dockerfile'
       - './github/workflows/docker_image.yml'
 env:
-  CX_FREEZE_VERSION: '7.2.0'
+  CX_FREEZE_VERSION_MINOR: '7.2'
+  CX_FREEZE_VERSION_PATCH: '1'
   PYTHON_VERSION_MAJOR: '3.11'
   PYTHON_VERSION_MINOR: '9'
   WINDOWS_VERSION: 'windowsservercore-1809'
@@ -44,17 +45,27 @@ jobs:
           --quiet
           --platform windows/amd64
           -t ${{ env.DOCKERHUB_REPO }}:latest
-          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}
-          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}
-          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
-          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
-          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.DOCKERHUB_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
           -t ${{ env.GHCR_REPO }}:latest
-          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}
-          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}
-          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
-          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
-          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}
+          -t ${{ env.GHCR_REPO }}:${{ env.CX_FREEZE_VERSION_MINOR }}.${{ env.CX_FREEZE_VERSION_PATCH }}-py${{ env.PYTHON_VERSION_MAJOR }}.${{ env.PYTHON_VERSION_MINOR }}-${{ env.WINDOWS_VERSION }}
           -f ${{ env.PYTHON_VERSION_MAJOR }}-${{ env.WINDOWS_VERSION }}.Dockerfile
           .
       - name: Test the built image

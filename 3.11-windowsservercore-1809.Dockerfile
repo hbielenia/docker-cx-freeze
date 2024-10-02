@@ -10,9 +10,9 @@
 
 FROM python:3.11-windowsservercore-1809@sha256:6c579f77d1b9407bebde36ce0d345cc576b6ffa5e6e75538517c7b50171258f0 AS install
 WORKDIR c:\\
-RUN powershell -Command "Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/e275be9de14bc276c6f541efd9e226007009a3e9.zip -OutFile cxfreeze.zip"
+RUN powershell -Command "Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/31492a8edea6f459cce301aaae56d462c3192d8c.zip -OutFile cxfreeze.zip"
 RUN powershell -Command "Expand-Archive cxfreeze.zip cxfreeze"
-RUN python -m pip install --disable-pip-version-check ./cxfreeze/cx_Freeze-e275be9de14bc276c6f541efd9e226007009a3e9/
+RUN python -m pip install --disable-pip-version-check ./cxfreeze/cx_Freeze-31492a8edea6f459cce301aaae56d462c3192d8c/
 
 FROM python:3.11-windowsservercore-1809@sha256:6c579f77d1b9407bebde36ce0d345cc576b6ffa5e6e75538517c7b50171258f0
 COPY --from=install c:\\Python c:\\Python\\
