@@ -24,7 +24,7 @@ on:
       - './github/workflows/docker_image.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '7.2'
-  CX_FREEZE_VERSION_PATCH: '2'
+  CX_FREEZE_VERSION_PATCH: '3'
   PYTHON_VERSION_MAJOR: '3.11'
   PYTHON_VERSION_MINOR: '9'
   WINDOWS_VERSION: 'windowsservercore-1809'
