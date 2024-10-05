@@ -9,10 +9,11 @@
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 FROM python:3.11-windowsservercore-1809@sha256:6c579f77d1b9407bebde36ce0d345cc576b6ffa5e6e75538517c7b50171258f0 AS install
+ARG CX_FREEZE_COMMIT_SHA=7a1ef98d38b60e127c17a1ea0a6fd6eac75b1071
 WORKDIR c:\\
-RUN powershell -Command "Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/7a1ef98d38b60e127c17a1ea0a6fd6eac75b1071.zip -OutFile cxfreeze.zip"
+RUN powershell -Command "Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/$Env:CX_FREEZE_COMMIT_SHA.zip -OutFile cxfreeze.zip"
 RUN powershell -Command "Expand-Archive cxfreeze.zip cxfreeze"
-RUN python -m pip install --disable-pip-version-check ./cxfreeze/cx_Freeze-7a1ef98d38b60e127c17a1ea0a6fd6eac75b1071/
+RUN python -m pip install --disable-pip-version-check ./cxfreeze/cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA/
 
 FROM python:3.11-windowsservercore-1809@sha256:6c579f77d1b9407bebde36ce0d345cc576b6ffa5e6e75538517c7b50171258f0
 COPY --from=install c:\\Python c:\\Python\\
