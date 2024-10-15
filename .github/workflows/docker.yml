@@ -6,7 +6,7 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software.
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-name: docker_image
+name: docker
 on:
   push:
     branches:
@@ -21,7 +21,7 @@ on:
       - reopened
     paths:
       - '3.11-windowsservercore-1809.Dockerfile'
-      - './github/workflows/docker_image.yml'
+      - './github/workflows/docker.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '7.2'
   CX_FREEZE_VERSION_PATCH: '3'
