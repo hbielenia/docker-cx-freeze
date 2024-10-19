@@ -21,7 +21,7 @@ on:
       - reopened
     paths:
       - '3.11-windowsservercore-1809.Dockerfile'
-      - './github/workflows/docker.yml'
+      - '.github/workflows/docker.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '7.2'
   CX_FREEZE_VERSION_PATCH: '3'
