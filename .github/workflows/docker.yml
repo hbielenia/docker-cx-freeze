@@ -77,6 +77,9 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push image to Docker Hub
+        if: github.event_name == 'push'
+        run: docker push -a -q ${{ env.DOCKERHUB_REPO }}
       - name: Log in to GitHub Container Registry
         if: github.event_name == 'push'
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # 3.3.0
@@ -84,6 +87,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push the built image
+      - name: Push image to GHCR
         if: github.event_name == 'push'
-        run: docker push -a -q ${{ env.DOCKERHUB_REPO }}
+        run: docker push -a -q ${{ env.GHCR_REPO }}
