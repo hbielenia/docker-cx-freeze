@@ -12,7 +12,7 @@ on:
     branches:
       - 'main'
     paths:
-      - '3.11-windowsservercore-1809.Dockerfile'
+      - '3.12-windowsservercore-1809.Dockerfile'
       - '.github/workflows/docker.yml'
   pull_request:
     types:
@@ -21,13 +21,13 @@ on:
       - ready_for_review
       - reopened
     paths:
-      - '3.11-windowsservercore-1809.Dockerfile'
+      - '3.12-windowsservercore-1809.Dockerfile'
       - '.github/workflows/docker.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '7.2'
   CX_FREEZE_VERSION_PATCH: '3'
-  PYTHON_VERSION_MAJOR: '3.11'
-  PYTHON_VERSION_MINOR: '9'
+  PYTHON_VERSION_MAJOR: '3.12'
+  PYTHON_VERSION_MINOR: '7'
   WINDOWS_VERSION: 'windowsservercore-1809'
   DOCKERHUB_REPO: ${{ vars.DOCKERHUB_USERNAME }}/cx-freeze
   GHCR_REPO: ghcr.io/${{ github.repository }}
