@@ -8,15 +8,17 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software.
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-FROM python:3.12-windowsservercore-1809@sha256:832c24f5cfb7e32ae00821f479db02b400b4d0ac1d808166cb41725192c434c3 AS install
-ARG CX_FREEZE_COMMIT_SHA=a2474eab285634ff59f3768a506e6b13ae77715b
-WORKDIR c:\\
-RUN powershell -Command "Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/$Env:CX_FREEZE_COMMIT_SHA.zip -OutFile cxfreeze.zip"
-RUN powershell -Command "Expand-Archive cxfreeze.zip cxfreeze"
-RUN python -m pip install --disable-pip-version-check ./cxfreeze/cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA/
-
 FROM python:3.12-windowsservercore-1809@sha256:832c24f5cfb7e32ae00821f479db02b400b4d0ac1d808166cb41725192c434c3
-COPY --from=install c:\\Python c:\\Python\\
+ARG CX_FREEZE_COMMIT_SHA=a2474eab285634ff59f3768a506e6b13ae77715b
 RUN mkdir c:\\Users\\ContainerUser\\SourceCode
+WORKDIR c:\\
+RUN powershell -Command " \
+	$ErrorActionPreference = 'Stop'; \
+	Invoke-WebRequest https://github.com/marcelotduarte/cx_Freeze/archive/$Env:CX_FREEZE_COMMIT_SHA.zip -OutFile cxfreeze.zip; \
+	Expand-Archive cxfreeze.zip cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA; \
+	Remove-Item -Path cxfreeze.zip; \
+"
+RUN python -m pip install --disable-pip-version-check -e .\\cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA\\cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA\\
 WORKDIR c:\\Users\\ContainerUser\\SourceCode
 CMD ["cxfreeze"]
+
