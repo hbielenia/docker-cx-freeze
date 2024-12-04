@@ -9,7 +9,7 @@
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 FROM python:3.12-windowsservercore-1809@sha256:832c24f5cfb7e32ae00821f479db02b400b4d0ac1d808166cb41725192c434c3
-ARG CX_FREEZE_COMMIT_SHA=36584a2d02bfe145bd190fc7aebc9270755b14de
+ARG CX_FREEZE_COMMIT_SHA=c3b530b47ffbbb5d07d3dd20c6011d6d4b6a7b45
 RUN mkdir c:\\Users\\ContainerUser\\SourceCode
 WORKDIR c:\\
 RUN powershell -Command " \
