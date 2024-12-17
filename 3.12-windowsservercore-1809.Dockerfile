@@ -8,7 +8,7 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software.
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-FROM python:3.12-windowsservercore-1809@sha256:832c24f5cfb7e32ae00821f479db02b400b4d0ac1d808166cb41725192c434c3
+FROM python:3.12-windowsservercore-1809@sha256:23b3a85a690df22f801b06b3313aea658b935725aec594eb3cb18854776c0af7
 ARG CX_FREEZE_COMMIT_SHA=c3b530b47ffbbb5d07d3dd20c6011d6d4b6a7b45
 RUN mkdir c:\\Users\\ContainerUser\\SourceCode
 WORKDIR c:\\
