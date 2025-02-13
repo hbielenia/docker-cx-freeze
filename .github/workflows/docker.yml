@@ -25,9 +25,9 @@ on:
       - '.github/workflows/docker.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '7.2'
-  CX_FREEZE_VERSION_PATCH: '7'
+  CX_FREEZE_VERSION_PATCH: '10'
   PYTHON_VERSION_MAJOR: '3.12'
-  PYTHON_VERSION_MINOR: '7'
+  PYTHON_VERSION_MINOR: '9'
   WINDOWS_VERSION: 'windowsservercore-1809'
   DOCKERHUB_REPO: ${{ vars.DOCKERHUB_USERNAME }}/cx-freeze
   GHCR_REPO: ghcr.io/${{ github.repository }}
