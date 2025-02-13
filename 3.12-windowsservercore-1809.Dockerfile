@@ -8,8 +8,8 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with this software.
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-FROM python:3.12-windowsservercore-1809@sha256:23b3a85a690df22f801b06b3313aea658b935725aec594eb3cb18854776c0af7
-ARG CX_FREEZE_COMMIT_SHA=c3b530b47ffbbb5d07d3dd20c6011d6d4b6a7b45
+FROM python:3.12-windowsservercore-1809@sha256:828cd05029317faa1c3e4ed79dabbb955416009b8588112f6078579ebb0b9d96
+ARG CX_FREEZE_COMMIT_SHA=5741131d381b9d77550e838806bb79a3b2bc6d1e
 RUN mkdir c:\\Users\\ContainerUser\\SourceCode
 WORKDIR c:\\
 RUN powershell -Command " \
@@ -21,4 +21,3 @@ RUN powershell -Command " \
 RUN python -m pip install --disable-pip-version-check -e .\\cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA\\cx_Freeze-$Env:CX_FREEZE_COMMIT_SHA\\
 WORKDIR c:\\Users\\ContainerUser\\SourceCode
 CMD ["cxfreeze"]
-
