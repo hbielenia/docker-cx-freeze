@@ -73,7 +73,7 @@ jobs:
         run: docker run --rm ${{ env.DOCKERHUB_REPO }}:latest cxfreeze --version
       - name: Log in to Docker Hub
         if: github.event_name == 'push'
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # 3.3.0
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # 3.4.0
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -82,7 +82,7 @@ jobs:
         run: docker push -a -q ${{ env.DOCKERHUB_REPO }}
       - name: Log in to GitHub Container Registry
         if: github.event_name == 'push'
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # 3.3.0
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # 3.4.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
