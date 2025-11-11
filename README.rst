@@ -3,7 +3,7 @@ docker-cx-freeze
 ================
 This repository holds configuration for building `Python's Docker image`_
 with `cx_Freeze`_ installed. Currently it supports only the
-``3.12-windowsservercore-1809`` platform.
+``3.13-windowsservercore-ltsc2022`` platform.
 
 Download
 ========
@@ -32,7 +32,7 @@ via the context menu on it's system tray icon.
 After completing these steps, clone this repository, open the Windows
 command line program in it's directory and execute::
 
-  docker build -t cx-freeze:latest -f 3.12-windowsservercore-1809.Dockerfile .
+  docker build -t cx-freeze:latest -f 3.13-windowsservercore-ltsc2022.Dockerfile .
 
 This will create an image tagged ``cx-freeze:latest`` in your local Docker image
 store. You can change this tag name to whatever you like, as long as it
@@ -47,7 +47,7 @@ to answer. However, there is genuine intent of providing support on a
 best effort basis.
 
 If you or your company require more commitment, you can inquire about
-paid support at ``13271065+hbielenia@users.noreply.github.com``.
+paid support at ``hbielenia@users.noreply.github.com``.
 
 Copyright
 =========
