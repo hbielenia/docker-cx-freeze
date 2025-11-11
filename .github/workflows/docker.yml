@@ -12,7 +12,7 @@ on:
     branches:
       - 'main'
     paths:
-      - '3.12-windowsservercore-1809.Dockerfile'
+      - '3.13-windowsservercore-ltsc2022.Dockerfile'
       - '.github/workflows/docker.yml'
   pull_request:
     types:
@@ -21,20 +21,20 @@ on:
       - ready_for_review
       - reopened
     paths:
-      - '3.12-windowsservercore-1809.Dockerfile'
+      - '3.13-windowsservercore-ltsc2022.Dockerfile'
       - '.github/workflows/docker.yml'
 env:
   CX_FREEZE_VERSION_MINOR: '8.1'
   CX_FREEZE_VERSION_PATCH: '0'
-  PYTHON_VERSION_MAJOR: '3.12'
+  PYTHON_VERSION_MAJOR: '3.13'
   PYTHON_VERSION_MINOR: '9'
-  WINDOWS_VERSION: 'windowsservercore-1809'
+  WINDOWS_VERSION: 'windowsservercore-ltsc2022'
   DOCKERHUB_REPO: ${{ vars.DOCKERHUB_USERNAME }}/cx-freeze
   GHCR_REPO: ghcr.io/${{ github.repository }}
   DOCKER_CACHE_PATH: C:\ProgramData\Docker\windowsfilter
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
