@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # docker-cx-freeze - Docker configuration for cx_Freeze.
-# Written in 2024 by Hubert Bielenia <13271065+hbielenia@users.noreply.github.com>
+# Written in 2024 by Hubert Bielenia <hbielenia@users.noreply.github.com>
 # To the extent possible under law, the author(s) have dedicated all copyright and related
 # and neighboring rights to this software to the public domain worldwide. This software
 # is distributed without any warranty.
