@@ -24,7 +24,7 @@ on:
       - '3.13-windowsservercore-ltsc2022.Dockerfile'
       - '.github/workflows/docker.yml'
 env:
-  CX_FREEZE_VERSION_MINOR: '8.3'
+  CX_FREEZE_VERSION_MINOR: '8.4'
   CX_FREEZE_VERSION_PATCH: '0'
   PYTHON_VERSION_MAJOR: '3.13'
   PYTHON_VERSION_MINOR: '9'
